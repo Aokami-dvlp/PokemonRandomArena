@@ -1,0 +1,41 @@
+body{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-width: 97vw;
+    min-height: 97vh;
+    background-image: url('assets/background.jfif');
+    background-size: cover;
+}
+
+#screen{
+    position:absolute;
+    top: 8.7%;
+    left: 35.2%;
+    height: 33%;
+    width: 29.5%;
+    background-color: rgba(255, 0, 157, 0.479);
+}
+
+#combatLine{
+    position:sticky;
+    top: 60vh;
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+    background-color: rgba(251, 255, 0, 0.479);
+}
+
+.player{
+    height: 20vh;
+    width: 10vw;
+}
+
+#p1{
+    background-color: red;
+    margin-right: 50px;
+}
+
+#p2{
+    background-color: blue;
+}
