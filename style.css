@@ -14,28 +14,25 @@ body{
     left: 35.2%;
     height: 33%;
     width: 29.5%;
-    background-color: rgba(255, 0, 157, 0.479);
+   text-align: center;
+}
+
+#screen h1 {
+    color:aqua;
 }
 
 #combatLine{
     position:sticky;
-    top: 60vh;
+    top: 68vh;
     display: flex;
     justify-content: center;
-    flex-basis: 100%;
-    background-color: rgba(251, 255, 0, 0.479);
 }
 
-.player{
-    height: 20vh;
-    width: 10vw;
+#p1 img{
+    margin-right: 70px;
+    scale: 1.5;
 }
 
-#p1{
-    background-color: red;
-    margin-right: 50px;
-}
-
-#p2{
-    background-color: blue;
+#p2 img{
+    scale: 1.5;
 }
