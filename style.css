@@ -4,8 +4,10 @@ body{
     padding: 0;
     min-width: 97vw;
     min-height: 97vh;
+    overflow:hidden;
     background-image: url('assets/background.jfif');
     background-size: cover;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #screen{
@@ -17,81 +19,76 @@ body{
     text-align: center;
 }
 
-#screen h1 {
-    color:aqua;
-}
-
-#p1Bar{
+.statusBar{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
-    position: absolute;
-    top:43%;
-    left: 24%;
-    height: 50px;
-    width: 190px;
-    background-color: rgba(0, 0, 0, .6);
-    border-radius: 5px;
-}
-
-#p2Bar{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
     justify-content: space-evenly;
     position: absolute;
     top: 43%;
-    right: 24%;
-    height: 50px;
-    width: 190px;
     background-color: rgba(0, 0, 0, .6);
     border-radius: 5px;
+    height: 50px;
+    width: 190px;
+    transition: .5s all ease-in;
+}
+.hiddenLeft{
+    left:-200px !important;
+}
+.hiddenRight{
+    right:-200px !important;
+}
+#p1Bar{
+    align-items: flex-start;
+    left: 24%;
+}
+#p2Bar{
+    align-items: flex-end;
+    right: 24%;
 }
 
-#nameDisplay{
+.nameDisplay{
 color: ivory;
-font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 font-weight: bold;
 }
-#p1Bar>#nameDisplay{
+#p1Bar>.nameDisplay{
     margin-left: 8px;
 }
-#p2Bar>#nameDisplay{
+#p2Bar>.nameDisplay{
     margin-right: 8px;
 }
 
-#hpBar{
+.hpBar{
     height: 4px;
     width: 150px;
     border-radius: 10px;
     border: 1px solid rgb(221, 220, 220);
+}
+#p1Bar>.hpBar{
+    margin-left: 30px;
     background-color: rgb(116, 1, 1);
 }
-#p1Bar>#hpBar{
-    margin-left: 30px;
-}
-#p2Bar>#hpBar{
+#p2Bar>.hpBar{
     margin-right: 30px;
+    background-color: rgb(3, 197, 3);
 }
 
-#p1HpLine{
+.hpLine{
     height: 4px;
-    width: 90%;
     border-radius: 10px;
+
+}
+#p1HpLine{  
+    width: 100%;    /*p1 must subtract damage received*/
     background-color: rgb(3, 197, 3);
 }
 #p2HpLine{
-    height: 4px;
-    width: 90%;
-    border-radius: 10px;
-    background-color: rgb(3, 197, 3);
+    width: 0%;      /*p2 must add damage received*/
+    background-color: rgb(116, 1, 1);
 }
 
 sub{
     color: ivory;
     font-size: 10px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 #p1Bar>sub{
     padding-left: 70%;
@@ -119,7 +116,8 @@ sub{
 button{
     position:absolute;
     bottom: 27px;
-    right: 46.5%;
+    right: 46%;
     padding: 6px;
     border-radius: 5px;
+    font-weight: bold;
 }
