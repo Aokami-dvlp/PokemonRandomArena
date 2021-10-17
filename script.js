@@ -25,13 +25,15 @@ class Pokemon{
     this.spd = genData.stats[5].base_stat;
     }}
 
-(async () => {
+    const button = document.querySelector('button');
+
+    button.addEventListener('click',async function() {
+    button.remove();
     const genData1 = await generate();
     const player1 = new Pokemon(genData1);
     console.log(player1);
     p1Image.src = player1.sprite;
     p1Image.alt = player1.pName;
-    p1Image.style = "transform: scaleX(-1)";
     canvas1.appendChild(p1Image);
 
     const genData2 = await generate();
