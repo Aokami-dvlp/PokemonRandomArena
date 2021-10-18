@@ -62,28 +62,26 @@ font-weight: bold;
     width: 150px;
     border-radius: 10px;
     border: 1px solid rgb(221, 220, 220);
+    background-color: rgb(116, 1, 1);
 }
 #p1Bar>.hpBar{
     margin-left: 30px;
-    background-color: rgb(116, 1, 1);
 }
 #p2Bar>.hpBar{
     margin-right: 30px;
-    background-color: rgb(3, 197, 3);
+    transform: scaleX(-1)
 }
 
 .hpLine{
     height: 4px;
     border-radius: 10px;
-
-}
-#p1HpLine{  
-    width: 100%;    /*p1 must subtract damage received*/
     background-color: rgb(3, 197, 3);
 }
+#p1HpLine{  
+    width: 100%;    
+}
 #p2HpLine{
-    width: 0%;      /*p2 must add damage received*/
-    background-color: rgb(116, 1, 1);
+    width: 100%;
 }
 
 sub{
@@ -103,6 +101,7 @@ sub{
     display: flex;
     justify-content: center;
 }
+
 
 #p1 img{
     margin-right: 70px;
