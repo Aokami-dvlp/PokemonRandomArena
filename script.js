@@ -308,7 +308,7 @@ function battleTurn(){
             p1Image.style.opacity = 0;
         }
     
-        screen.innerHTML = "";
+        screen.innerHTML = " ";
         screen.appendChild(winner);
     }
 
