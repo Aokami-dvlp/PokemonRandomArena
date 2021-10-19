@@ -56,7 +56,7 @@ function remodulate(stat){
 function fight(attack, defense){
     const critical = critProbability();
     console.log(`critical: ${critical}`)
-    const damage = Math.floor(((Math.random()*6)+1 + (Math.random()*4)+1)+ attack) - defense + critical;
+    const damage = Math.floor(((Math.random()*6)+1 + (Math.random()*4)+1)+ attack) - (Math.floor(Math.random()*4) + defense) + critical;
     console.log(damage);
     if(damage < 0){
         return 0

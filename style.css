@@ -23,23 +23,25 @@ body{
 
 #screen h1{
     padding: 10% 20px;
-    color:lightgreen;
+    color: rgba(50, 219, 72, 1);
 }
 
 #screen p{
-    color: ivory;
+    padding: 0px 4px;
+    color: rgba(50, 219, 72, 0.486);
+    font-weight: bold;
 }
 
 #screen p:first-child{
-    color:lawngreen;
+    color: rgba(50, 219, 72, 1);
 }
 
 #screen::-webkit-scrollbar{
-    width: 20px;
+    width: 10px;
 }
 
 #screen::-webkit-scrollbar-thumb {
-    background-image: url('assets/favicon.ico');
+    background-image: url('assets/favicon.png');
     background-size: 100%;
     background-position: center;
     background-repeat: no-repeat; 
