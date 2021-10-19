@@ -73,6 +73,52 @@ function applyDamage(hp, damage){
     }
 }
 
+//Function to reduce the hpLine proportionally to player HP
+function percentageHp(hp, maxHp){
+    const percentage = Math.floor((100*hp)/maxHp);
+    return percentage + "%"
+}
+
+//Function to print combat log on screen
+function damageMessage(name,damage){
+    let message = document.createElement('p');
+    message.textContent = `${name} attacca ed infligge ${damage} danni`
+    screen.prepend(message)
+}
+
+//Functions to animate attacks
+function playerAttack1(player1, player2){
+    player1.style.transition = ".2s";
+    player1.style.transform = "scaleX(-1) translateX(-90px)";
+    setTimeout(() => {
+    player1.style.transform = "scaleX(-1) translateX(0px)";    
+    }, 300);
+    
+    player2.style.transition = ".5s";   
+    player2.style.transform = "translateX(10px)";
+    setTimeout(() => {
+    player2.style.transition = ".1s";   
+    player2.style.transform = "translateX(0px)";    
+    }, 700);
+    
+}
+
+function playerAttack2(player2, player1){
+    player2.style.transition = ".2s";
+    player2.style.transform = "translateX(-90px)";
+    setTimeout(() => {
+    player2.style.transform = "translateX(0px)";    
+    }, 300);
+    
+    player1.style.transition = ".5s";   
+    player1.style.transform = "scaleX(-1) translateX(10px)";
+    setTimeout(() => {
+    player1.style.transition = ".1s";   
+    player1.style.transform = "scaleX(-1) translateX(0px)";    
+    }, 700);
+    
+}
+
 const button = document.querySelector('button');
 
 button.addEventListener('click',async function() {
@@ -84,9 +130,6 @@ button.addEventListener('click',async function() {
     //Pass data to class to build the object
     const player1 = new Pokemon(genData1);
     const player2 = new Pokemon(genData2);
-
-    console.log(player1);
-    console.log(player2);
 
     //Pass the pokemon name and hp on screen
     p1Name.textContent = player1.pName;
@@ -130,81 +173,120 @@ button.addEventListener('click',async function() {
             firstAttack = 2;
         }
 
-let battle = setInterval(battleTurn, 4000);
-    
+let battle = setInterval(battleTurn, 3000);
+
 function battleTurn(){
+
+//Control if players hp are > 0 before starting the first attack of the turn
     if(player1.hp > 0 && player2.hp > 0){
-        if(firstAttack == 1 && counter%2 == 0){
+//        if(firstAttack == 1 && counter%2 == 0){
+            playerAttack1(p1Image,p2Image);
             damage = fight(player1.atk, player2.def);
             player2.hp = applyDamage(player2.hp, damage);
-            //damageMessage(player1.pName, damage);
+            damageMessage(player1.pName, damage);
             p2HpNumeric.textContent = `${player2.hp} / ${p2MaxHp} HP`;
+            p2HpLine.style.width = percentageHp(player2.hp, p2MaxHp);
+            
         
+//Control if the defender's hp from the previous attack are still > 0 (repeated on every conditional linked to firstAttack and counter variables)
             if(player2.hp > 0){
                 setTimeout(() => {
+                playerAttack2(p2Image, p1Image);
                 damage = fight(player2.atk, player1.def);
                 player1.hp = applyDamage(player1.hp, damage);
-                //damageMessage(player2.pName, damage);
+                damageMessage(player2.pName, damage);
                 p1HpNumeric.textContent = `${player1.hp} / ${p1MaxHp} HP`;
+                p1HpLine.style.width = percentageHp(player1.hp, p1MaxHp);
                 }, 2000);    
             } else {
-            clearInterval(battle)
+            clearInterval(battle);
+            battle = null;
         }
-    
+    /*
         } else if (firstAttack == 2 && counter%2 == 0){
             damage = fight(player2.atk, player1.def);
             player1.hp = applyDamage(player1.hp, damage);
-            //damageMessage(player2.pName, damage);
+            damageMessage(player2.pName, damage);
             p1HpNumeric.textContent = `${player1.hp} / ${p1MaxHp} HP`;
+            p1HpLine.style.width = percentageHp(player1.hp, p1MaxHp);
             
             if(player1.hp > 0){
                 setTimeout(() => {
                 damage = fight(player1.atk, player2.def);
                 player2.hp = applyDamage(player2.hp, damage);
-                //damageMessage(player1.pName, damage);
+                damageMessage(player1.pName, damage);
                 p2HpNumeric.textContent = `${player2.hp} / ${p2MaxHp} HP`;
+                p2HpLine.style.width = percentageHp(player2.hp, p2MaxHp);
                 }, 2000);
             } else {
-                clearInterval(battle)
+                clearInterval(battle);
+                battle = null;
             }
     
         } else if (firstAttack == 1 && counter%2 == 1){
             damage = fight(player1.sAtk, player2.sDef);
             player2.hp = applyDamage(player2.hp, damage);
-            //damageMessage(player1.pName, damage);
+            damageMessage(player1.pName, damage);
             p2HpNumeric.textContent = `${player2.hp} / ${p2MaxHp} HP`;
+            p2HpLine.style.width = percentageHp(player2.hp, p2MaxHp);
+
     
             if(player2.hp > 0){
                 setTimeout(() => {
                 damage = fight(player2.sAtk, player1.sDef);
                 player1.hp = applyDamage(player1.hp, damage);
-                //damageMessage(player2.pName, damage);
+                damageMessage(player2.pName, damage);
                 p1HpNumeric.textContent = `${player1.hp} / ${p1MaxHp} HP`;
+                p1HpLine.style.width = percentageHp(player1.hp, p1MaxHp);
                 }, 2000);
             } else {
-                clearInterval(battle)
+                clearInterval(battle);
+                battle = null;
             }
     
         } else if (firstAttack == 2 && counter%2 == 1){
             damage = fight(player2.sAtk, player1.sDef);
             player1.hp = applyDamage(player1.hp, damage);
-            //damageMessage(player2.pName, damage);
+            damageMessage(player2.pName, damage);
             p1HpNumeric.textContent = `${player1.hp} / ${p1MaxHp} HP`;
+            p1HpLine.style.width = percentageHp(player1.hp, p1MaxHp);
     
             if(player1.hp > 0){
                 setTimeout(() => {
                 damage = fight(player1.sAtk, player2.sDef);
                 player2.hp = applyDamage(player2.hp, damage);
-                //damageMessage(player1.pName, damage);
+                damageMessage(player1.pName, damage);
                 p2HpNumeric.textContent = `${player2.hp} / ${p2MaxHp} HP`;
+                p2HpLine.style.width = percentageHp(player2.hp, p2MaxHp);
                 }, 2000);
             } else {
                 clearInterval(battle);
+                battle = null;
             }}    
-        counter++;
+        counter++;*/
     } else {
         clearInterval(battle);
+        battle = null;
     }
+
+    if(battle == null){
+
+    let winner = document.createElement('h1');
+        
+        if(player1.hp > 0){
+            winner.textContent = `${player1.pName} vince lo scontro!`;
+            p2Image.style.transition = '3s'
+            p2Image.style.opacity = 0;
+        } else {
+            winner.textContent = `${player2.pName} vince lo scontro!`;
+            p1Image.style.transition = '3s'
+            p1Image.style.opacity = 0;
+        }
+    
+        screen.innerHTML = "";
+        screen.appendChild(winner);
+    }
+
 }});
     
     

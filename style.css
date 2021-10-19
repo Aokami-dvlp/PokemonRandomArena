@@ -17,7 +17,33 @@ body{
     height: 33%;
     width: 29.5%;
     text-align: center;
+    overflow:auto;
+    overflow-x: hidden;
 }
+
+#screen h1{
+    padding: 10% 20px;
+    color:lightgreen;
+}
+
+#screen p{
+    color: ivory;
+}
+
+#screen p:first-child{
+    color:lawngreen;
+}
+
+#screen::-webkit-scrollbar{
+    width: 20px;
+}
+
+#screen::-webkit-scrollbar-thumb {
+    background-image: url('assets/favicon.ico');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat; 
+  }
 
 .statusBar{
     display: flex;
@@ -76,6 +102,7 @@ font-weight: bold;
     height: 4px;
     border-radius: 10px;
     background-color: rgb(3, 197, 3);
+    transition: 0.4s;
 }
 #p1HpLine{  
     width: 100%;    
@@ -106,7 +133,7 @@ sub{
 #p1 img{
     margin-right: 70px;
     scale: 1.5;
-    transform: scaleX(-1)
+    transform: scaleX(-1);
 }
 #p2 img{
     scale: 1.5;
