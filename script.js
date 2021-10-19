@@ -179,7 +179,7 @@ function battleTurn(){
 
 //Control if players hp are > 0 before starting the first attack of the turn
     if(player1.hp > 0 && player2.hp > 0){
-//        if(firstAttack == 1 && counter%2 == 0){
+        if(firstAttack == 1 && counter%2 == 0){
             playerAttack1(p1Image,p2Image);
             damage = fight(player1.atk, player2.def);
             player2.hp = applyDamage(player2.hp, damage);
@@ -202,8 +202,9 @@ function battleTurn(){
             clearInterval(battle);
             battle = null;
         }
-    /*
+
         } else if (firstAttack == 2 && counter%2 == 0){
+            playerAttack2(p2Image, p1Image);
             damage = fight(player2.atk, player1.def);
             player1.hp = applyDamage(player1.hp, damage);
             damageMessage(player2.pName, damage);
@@ -212,6 +213,7 @@ function battleTurn(){
             
             if(player1.hp > 0){
                 setTimeout(() => {
+                playerAttack1(p1Image,p2Image);
                 damage = fight(player1.atk, player2.def);
                 player2.hp = applyDamage(player2.hp, damage);
                 damageMessage(player1.pName, damage);
@@ -224,6 +226,7 @@ function battleTurn(){
             }
     
         } else if (firstAttack == 1 && counter%2 == 1){
+            playerAttack1(p1Image,p2Image);
             damage = fight(player1.sAtk, player2.sDef);
             player2.hp = applyDamage(player2.hp, damage);
             damageMessage(player1.pName, damage);
@@ -233,6 +236,7 @@ function battleTurn(){
     
             if(player2.hp > 0){
                 setTimeout(() => {
+                playerAttack2(p2Image, p1Image);
                 damage = fight(player2.sAtk, player1.sDef);
                 player1.hp = applyDamage(player1.hp, damage);
                 damageMessage(player2.pName, damage);
@@ -245,6 +249,7 @@ function battleTurn(){
             }
     
         } else if (firstAttack == 2 && counter%2 == 1){
+            playerAttack2(p2Image, p1Image);
             damage = fight(player2.sAtk, player1.sDef);
             player1.hp = applyDamage(player1.hp, damage);
             damageMessage(player2.pName, damage);
@@ -253,6 +258,7 @@ function battleTurn(){
     
             if(player1.hp > 0){
                 setTimeout(() => {
+                playerAttack1(p1Image,p2Image);
                 damage = fight(player1.sAtk, player2.sDef);
                 player2.hp = applyDamage(player2.hp, damage);
                 damageMessage(player1.pName, damage);
@@ -263,7 +269,7 @@ function battleTurn(){
                 clearInterval(battle);
                 battle = null;
             }}    
-        counter++;*/
+        counter++;
     } else {
         clearInterval(battle);
         battle = null;
