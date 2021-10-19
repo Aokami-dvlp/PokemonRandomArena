@@ -293,9 +293,8 @@ function battleTurn(){
         clearInterval(battle);
         battle = null;
     }
-
+//Announce the winner on screen and make the loser disappear
     if(battle == null){
-
     let winner = document.createElement('h1');
         
         if(player1.hp > 0){
@@ -310,6 +309,14 @@ function battleTurn(){
     
         screen.innerHTML = " ";
         screen.appendChild(winner);
+    
+        let restart = document.createElement('button');
+        let body = document.querySelector('body')
+        restart.textContent = 'Combatti ancora!'
+        body.appendChild(restart);
+        restart.addEventListener('click', function(){
+            window.location.reload();
+        });
     }
 
 }});
