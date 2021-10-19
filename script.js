@@ -11,7 +11,7 @@ let p2HpNumeric = document.querySelector('#p2HpNumeric');
 // Function to fetch the needed data
 async function generate(){
 // Randomize fetched pokemon
-    let random = Math.floor(Math.random() * 897) + 1;
+    let random = Math.floor(Math.random() * 898) + 1;
     let fetchUrl = `https://pokeapi.co/api/v2/pokemon/${random}/`;
     let imageSrc = `https://raw.githubusercontent.com/PokeApi/sprites/master/sprites/pokemon/${random}.png`;
     let response = await fetch(fetchUrl);
@@ -54,12 +54,23 @@ function remodulate(stat){
 
 //Function to calculate the damage inflicted
 function fight(attack, defense){
-    const damage = Math.floor(((Math.random()*5)+1 + (Math.random()*3)+1)+ attack) - defense;
+    const critical = critProbability();
+    console.log(`critical: ${critical}`)
+    const damage = Math.floor(((Math.random()*6)+1 + (Math.random()*4)+1)+ attack) - defense + critical;
     console.log(damage);
     if(damage < 0){
         return 0
     } else{
         return damage;
+    }
+}
+//Function to make critical hits with 10% probability
+function critProbability(){
+    let result = Math.floor(Math.random()*10)+1;
+    if(result === 10){
+        return 10;
+    } else {
+        return 0;
     }
 }
 
@@ -82,7 +93,15 @@ function percentageHp(hp, maxHp){
 //Function to print combat log on screen
 function damageMessage(name,damage){
     let message = document.createElement('p');
-    message.textContent = `${name} attacca ed infligge ${damage} danni`
+    if(damage == 0){
+        message.textContent = `${name} attacca ma fallisce`;
+    } else if(damage > 0 && damage < 8){
+        message.textContent = `${name} attacca ed infligge ${damage} danni`;
+    } else if(damage > 7 && damage < 12){
+        message.textContent = `${name} attacca ed infligge ${damage} danni, che brutto colpo!`;
+    } else if(damage >= 12){
+        message.textContent = `${name} attacca ed infligge ${damage} danni, AMMAZZA CHE PEZZA`;
+    }
     screen.prepend(message)
 }
 
@@ -118,20 +137,20 @@ function playerAttack2(player2, player1){
     }, 700);
     
 }
-
+//Script starter!
 const button = document.querySelector('button');
 
 button.addEventListener('click',async function() {
     button.remove();
-    //Call the function to fetch data
+//Call the function to fetch data
     const genData1 = await generate();
     const genData2 = await generate();
 
-    //Pass data to class to build the object
+//Pass data to class to build the object
     const player1 = new Pokemon(genData1);
     const player2 = new Pokemon(genData2);
 
-    //Pass the pokemon name and hp on screen
+//Pass the pokemon name and hp on screen
     p1Name.textContent = player1.pName;
     p2Name.textContent = player2.pName;
     
@@ -141,13 +160,13 @@ button.addEventListener('click',async function() {
     let p2MaxHp = player2.hp;
     p2HpNumeric.textContent = `${player2.hp} / ${p2MaxHp} HP`;
     
-    //Show status bars:
+//Show status bars:
     const p1StatusBar = document.querySelector("#p1Bar");
     const p2StatusBar = document.querySelector("#p2Bar");
     p1StatusBar.classList.toggle('hiddenLeft');
     p2StatusBar.classList.toggle('hiddenRight');
     
-    //Pass the pokemon images on screen after status bars are showed
+//Pass the pokemon images on screen after status bars are showed
     setTimeout(() => {
 
     p1Image.src = player1.sprite;
@@ -197,7 +216,7 @@ function battleTurn(){
                 damageMessage(player2.pName, damage);
                 p1HpNumeric.textContent = `${player1.hp} / ${p1MaxHp} HP`;
                 p1HpLine.style.width = percentageHp(player1.hp, p1MaxHp);
-                }, 2000);    
+                }, 1500);    
             } else {
             clearInterval(battle);
             battle = null;
@@ -219,7 +238,7 @@ function battleTurn(){
                 damageMessage(player1.pName, damage);
                 p2HpNumeric.textContent = `${player2.hp} / ${p2MaxHp} HP`;
                 p2HpLine.style.width = percentageHp(player2.hp, p2MaxHp);
-                }, 2000);
+                }, 1500);
             } else {
                 clearInterval(battle);
                 battle = null;
@@ -242,7 +261,7 @@ function battleTurn(){
                 damageMessage(player2.pName, damage);
                 p1HpNumeric.textContent = `${player1.hp} / ${p1MaxHp} HP`;
                 p1HpLine.style.width = percentageHp(player1.hp, p1MaxHp);
-                }, 2000);
+                }, 1500);
             } else {
                 clearInterval(battle);
                 battle = null;
@@ -264,7 +283,7 @@ function battleTurn(){
                 damageMessage(player1.pName, damage);
                 p2HpNumeric.textContent = `${player2.hp} / ${p2MaxHp} HP`;
                 p2HpLine.style.width = percentageHp(player2.hp, p2MaxHp);
-                }, 2000);
+                }, 1500);
             } else {
                 clearInterval(battle);
                 battle = null;
