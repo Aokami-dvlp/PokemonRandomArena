@@ -126,7 +126,7 @@ sub{
 
 #combatLine{
     position:sticky;
-    top: 68vh;
+    top: 60vh;
     display: flex;
     justify-content: center;
 }
@@ -134,11 +134,11 @@ sub{
 
 #p1 img{
     margin-right: 70px;
-    scale: 1.5;
     transform: scaleX(-1);
+    min-width: 180px;
 }
 #p2 img{
-    scale: 1.5;
+    min-width: 180px;
 }
 
 button{
