@@ -34,22 +34,23 @@ class Pokemon{
 
 //Function to scale the stats to make them usable in battle system
 function remodulate(stat){
-    if(stat<31){
-        return 1;
-    } else if(30<stat && stat<61){
-        return 2;
-    } else if(60<stat && stat<91){
-        return 3;
-    } else if(90<stat && stat<121){
-        return 4;
-    } else if(120<stat && stat<151){
-        return 5;
-    } else if(150<stat && stat<181){
-        return 6;
-    } else if(180<stat && stat<211){
-        return 7;
-    } else{
-        return 8;
+    switch(true){
+        case stat <= 30:
+            return 1;
+        case stat <= 60:
+            return 2;
+        case stat <= 90:
+            return 3;
+        case stat <= 120:
+            return 4;
+        case stat <= 150:
+            return 5;
+        case stat <= 180:
+            return 6;
+        case stat <= 210:
+            return 7;
+        default:
+            return 8;
     }}
 
 //Function to calculate the damage inflicted
